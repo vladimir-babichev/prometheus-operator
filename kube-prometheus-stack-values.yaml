@@ -1,0 +1,78 @@
+defaultRules:
+  rules:
+    alertmanager: false
+    etcd: false
+    general: false
+    k8s: false
+    kubeApiserver: false
+    kubeApiserverAvailability: false
+    kubeApiserverError: false
+    kubeApiserverSlos: false
+    kubelet: false
+    kubePrometheusGeneral: false
+    kubePrometheusNodeAlerting: false
+    kubePrometheusNodeRecording: false
+    kubernetesAbsent: false
+    kubernetesApps: false
+    kubernetesResources: false
+    kubernetesStorage: false
+    kubernetesSystem: false
+    kubeScheduler: false
+    kubeStateMetrics: false
+    network: false
+    node: false
+    prometheus: false
+    prometheusOperator: false
+    time: false
+
+
+coreDns:
+  service:
+    selector:
+      k8s-app: kube-dns
+
+
+prometheus:
+  prometheusSpec:
+    serviceMonitorSelectorNilUsesHelmValues: "false"
+    serviceMonitorSelector: {}
+    ruleSelectorNilUsesHelmValues: "false"
+    ruleSelector:
+      matchLabels:
+        release: prom-stack
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    hosts:
+      - prom.host
+    paths:
+      - "/"
+
+grafana:
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    hosts:
+      - grafana.host
+    path: "/"
+  adminPassword: testpass
+  grafana.ini:
+    server:
+      enable_gzip: "true"
+    analytics:
+      check_for_updates: false
+      reporting_enabled: false
+    auth.anonymous:
+      enabled: true
+
+alertmanager:
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    hosts:
+      - am.host
+    paths:
+      - "/"
