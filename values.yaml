@@ -35,11 +35,10 @@ coreDns:
 prometheus:
   prometheusSpec:
     serviceMonitorSelectorNilUsesHelmValues: "false"
-    serviceMonitorSelector: {}
     ruleSelectorNilUsesHelmValues: "false"
     ruleSelector:
       matchLabels:
-        release: prom-stack
+        release: prometheus-operator
   ingress:
     enabled: true
     annotations:
