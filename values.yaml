@@ -42,9 +42,9 @@ prometheus:
   ingress:
     enabled: true
     annotations:
-      kubernetes.io/ingress.class: nginx
+      kubernetes.io/ingress.class: ingress-nginx
     hosts:
-      - prom.host
+      - prometheus.host
     paths:
       - "/"
 
@@ -52,11 +52,11 @@ grafana:
   ingress:
     enabled: true
     annotations:
-      kubernetes.io/ingress.class: nginx
+      kubernetes.io/ingress.class: ingress-nginx
     hosts:
       - grafana.host
     path: "/"
-  adminPassword: testpass
+  adminPassword: prometheus-operator
   grafana.ini:
     server:
       enable_gzip: "true"
@@ -70,8 +70,8 @@ alertmanager:
   ingress:
     enabled: true
     annotations:
-      kubernetes.io/ingress.class: nginx
+      kubernetes.io/ingress.class: ingress-nginx
     hosts:
-      - am.host
+      - alertmanager.host
     paths:
       - "/"
