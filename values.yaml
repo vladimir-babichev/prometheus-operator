@@ -12,7 +12,7 @@ kube-prometheus-stack:
       kubelet: false
       kubePrometheusGeneral: false
       kubePrometheusNodeAlerting: false
-      kubePrometheusNodeRecording: false
+      kubePrometheusNodeRecording: true
       kubernetesAbsent: false
       kubernetesApps: false
       kubernetesResources: false
@@ -49,6 +49,7 @@ kube-prometheus-stack:
       paths:
         - "/"
 
+
   grafana:
     ingress:
       enabled: true
@@ -60,7 +61,24 @@ kube-prometheus-stack:
     sidecar:
       dashboards:
         searchNamespace: ALL
-
+    # Configure dashboard provider to pre-install dashboards
+    dashboardProviders:
+      dashboardproviders.yaml:
+        apiVersion: 1
+        providers:
+        - name: 'default'
+          orgId: 1
+          folder: ''
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/default
+    # List of dashbords we want to pre-installed dashboards
+    dashboards:
+      default:
+        argocd-dashboard:
+          url: https://raw.githubusercontent.com/argoproj/argo-cd/master/examples/dashboard.json
     adminPassword: prometheus-operator
     grafana.ini:
       server:
@@ -70,6 +88,7 @@ kube-prometheus-stack:
         reporting_enabled: false
       auth.anonymous:
         enabled: true
+
 
   alertmanager:
     ingress:
