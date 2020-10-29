@@ -34,12 +34,8 @@ coreDns:
 
 prometheus:
   prometheusSpec:
-    ruleNamespaceSelector:
-      any: true
-    serviceMonitorNamespaceSelector:
-      any: true
-    serviceMonitorSelectorNilUsesHelmValues: "false"
-    ruleSelectorNilUsesHelmValues: "false"
+    serviceMonitorSelectorNilUsesHelmValues: false
+    ruleSelectorNilUsesHelmValues: false
     ruleSelector:
       matchLabels:
         release: prometheus-operator
