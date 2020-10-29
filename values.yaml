@@ -43,7 +43,7 @@ kube-prometheus-stack:
     ingress:
       enabled: true
       annotations:
-        kubernetes.io/ingress.class: ingress-nginx
+        kubernetes.io/ingress.class: nginx
       hosts:
         - prometheus.host
       paths:
@@ -53,7 +53,7 @@ kube-prometheus-stack:
     ingress:
       enabled: true
       annotations:
-        kubernetes.io/ingress.class: ingress-nginx
+        kubernetes.io/ingress.class: nginx
       hosts:
         - grafana.host
       path: "/"
@@ -75,7 +75,7 @@ kube-prometheus-stack:
     ingress:
       enabled: true
       annotations:
-        kubernetes.io/ingress.class: ingress-nginx
+        kubernetes.io/ingress.class: nginx
       hosts:
         - alertmanager.host
       paths:
