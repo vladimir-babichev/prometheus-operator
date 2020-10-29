@@ -34,6 +34,10 @@ coreDns:
 
 prometheus:
   prometheusSpec:
+    ruleNamespaceSelector:
+      any: true
+    serviceMonitorNamespaceSelector:
+      any: true
     serviceMonitorSelectorNilUsesHelmValues: "false"
     ruleSelectorNilUsesHelmValues: "false"
     ruleSelector:
@@ -56,6 +60,10 @@ grafana:
     hosts:
       - grafana.host
     path: "/"
+  sidecar:
+    dashboards:
+      searchNamespace: ALL
+
   adminPassword: prometheus-operator
   grafana.ini:
     server:
